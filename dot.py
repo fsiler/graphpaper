@@ -3,7 +3,7 @@ import PyPDF2
 from reportlab.lib.pagesizes import letter, inch, mm
 from reportlab.pdfgen import canvas
 
-spacing = inch / 3
+spacing = mm * 7.5
 # Function to create a single page with a gray dot grid
 def create_dot_grid_page(output_pdf):
     c = canvas.Canvas(output_pdf, pagesize=letter)
