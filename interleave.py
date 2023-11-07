@@ -5,6 +5,7 @@ from reportlab.lib.pagesizes import letter, mm
 from reportlab.pdfgen import canvas
 
 spacing = mm * 7.5
+shade = 0.45
 
 # Function to create a single page with a gray dot grid
 def create_dot_grid_page(output_pdf):
@@ -12,8 +13,8 @@ def create_dot_grid_page(output_pdf):
 
     for x in range(0, int(letter[0]), int(spacing)):
         for y in range(0, int(letter[1]), int(spacing)):
-            c.setFillColorRGB(0.4, 0.4, 0.4)  # Gray color
-            c.circle(x + spacing / 2, y + spacing / 2, 0.4, stroke=0, fill=1)
+            c.setFillColorRGB(shade, shade, shade)  # Gray color
+            c.circle(x + spacing / 2, y + spacing / 2, 0.6, stroke=0, fill=1)
 
 ## add text
 #    c.setFillColorRGB(0.7, 0.7, 0.7)  # Light gray color
