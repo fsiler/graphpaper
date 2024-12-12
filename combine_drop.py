@@ -3,12 +3,13 @@ from tkinterdnd2 import DND_FILES, TkinterDnD
 from tkinter import messagebox
 import PyPDF2
 import os
+from datetime import datetime
 
 class PDFCombinerApp:
     def __init__(self, master):
         self.master = master
         master.title("PDF Combiner")
-        master.geometry("300x200")
+        master.geometry("400x300")
 
         self.label = tk.Label(master, text="Drop PDF files here", font=("Arial", 14))
         self.label.pack(expand=True, fill='both')
@@ -27,11 +28,15 @@ class PDFCombinerApp:
             messagebox.showwarning("No PDFs", "No PDF files were dropped.")
             return
 
-        output_file = "combined_output.pdf"
-        self.combine_pdfs(pdf_files, output_file)
+        output_file = self.combine_pdfs(pdf_files)
         messagebox.showinfo("Success", f"PDFs combined into {output_file}")
 
-    def combine_pdfs(self, input_files, output_file):
+    def combine_pdfs(self, input_files):
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        base_names = "_".join([os.path.splitext(os.path.basename(f))[0] for f in input_files])
+        truncated_names = base_names[:50]  # Limit to 50 characters to avoid excessively long filenames
+        output_file = f"{timestamp}_{truncated_names}_combined.pdf"
+
         pdf_writer = PyPDF2.PdfWriter()
 
         for file in input_files:
@@ -41,6 +46,8 @@ class PDFCombinerApp:
 
         with open(output_file, 'wb') as out:
             pdf_writer.write(out)
+
+        return output_file
 
 if __name__ == "__main__":
     root = TkinterDnD.Tk()
