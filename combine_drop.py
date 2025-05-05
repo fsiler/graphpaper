@@ -1,3 +1,4 @@
+#!/usr/bin/env python
 import tkinter as tk
 from tkinterdnd2 import DND_FILES, TkinterDnD
 from tkinter import messagebox
