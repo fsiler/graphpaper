@@ -1,5 +1,0 @@
-tk
-tkinterdnd2
-reportlab
-PyPDF2
-pycryptodome
